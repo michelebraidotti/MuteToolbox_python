@@ -1,9 +1,14 @@
 class AbstractStrategy():
+	def __init__(self):
+		self.results = ""
 	def setData(self, data):
 		self.data = data
+	def getResults(self):
+		return self.results
+	def getStrategyName(self):
+		raise NotImplementedError('Abstract method should not be used directly')
 	def run(self):
-		# abstract method!
-		raise NotImplementedError('abstract method should not be used directly')
+		raise NotImplementedError('Abstract method should not be used directly')
 
 class BinningStrategy(AbstractStrategy):
 	def run(self):
@@ -14,11 +19,16 @@ class BinningStrategy(AbstractStrategy):
 				binBig.append(d)
 			else:
 				binSmall.append(d)
-		print("Small bin has",len(binSmall),"elems, Big bin as",len(binBig),"elems\n")
+		self.results = "Small bin has %i elems, Big bin as %i elems" % ( len(binSmall) , len(binBig) ) 
+	def getStrategyName(self):
+		return 'Binning'
 
 class AverageStrategy(AbstractStrategy):
 	def run(self):
 		sum = 0
 		for d in self.data:
 			sum += d
-		print("Average is",sum/len(self.data))
+		self.results = "Average is %i" % ( sum/len(self.data) )
+	def getStrategyName(self):
+		return 'Average'
+
