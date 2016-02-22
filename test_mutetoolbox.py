@@ -2,30 +2,23 @@
 import sys
 import mutetoolbox.strategies
 
-data = [1,34,5,6,12]
+data = [1, 34, 5, 6, 12]
 
-
-
-print("Classc OO")
+print("Classic OO")
 binning = mutetoolbox.strategies.BinningStrategy()
-binning.setData(data)
+binning.set_data(data)
 binning.run()
-print binning.getResults()
+print(binning.get_results())
 
-average =  mutetoolbox.strategies.AverageStrategy()
-average.setData(data)
+average = mutetoolbox.strategies.AverageStrategy()
+average.set_data(data)
 average.run()
-print average.getResults()
-
-
+print(average.get_results())
 
 print("Fancy OO")
-strategies = []
-strategies.append(mutetoolbox.strategies.BinningStrategy())
-strategies.append(mutetoolbox.strategies.AverageStrategy())
+strategies = [mutetoolbox.strategies.BinningStrategy(), mutetoolbox.strategies.AverageStrategy()]
 for strategy in strategies:
-	strategy.setData(data)
-	strategy.run()
-	sys.stdout.write( strategy.getStrategyName() + " results: " )
-	print strategy.getResults()
-
+    strategy.set_data(data)
+    strategy.run()
+    sys.stdout.write(strategy.get_strategy_name() + " results: ")
+    print(strategy.get_results())
