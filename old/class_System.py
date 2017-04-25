@@ -6,12 +6,13 @@ class complexSystem:
 
 	import numpy as np
 
-	def __init__(self, data):
+	def __init__(self, data, selectedTimeSeries):
 		# print(data)
 		#data has to be a matrix of numSubSystems x numTimePoints dimensions
 		if not data.size:
 			sys.exit('MuTE Error: "data" must not be empty')
 		self.data = data
+		self.selectedTimeSeries = selectedTimeSeries #selectedTimeSeries is a vector that stores the time series that you actually want to use in your analysis. Ex. you have a 12x200 data matrix. You might only want to analyse a subset of the 12 variables.
 		self.candidates = {}
 		self.systemDict = {}
 		self.dictAnalyses = {}
@@ -164,6 +165,8 @@ class complexSystem:
 
 
 	def binnue(self):
+		#I think that it would be better to create a statisticalApproaches that inherit complexSistem. What I would like to have is something like
+		#binnue.method() where binnue has its own parameters. Can this scenario be achieved even with this structure?
 		if not (self.params):
 			sys.exit('MuTE Error: initialization step required. Please initialize your "System" object' + 
 				' filling "params" dictionary')
